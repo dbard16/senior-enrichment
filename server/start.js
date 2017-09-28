@@ -19,7 +19,7 @@ module.exports = app
   .use('/api', require('./api')) // Serve our api
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html'))) // Send index.html for any other requests.
   app.use('/vendor', express.static(path.join(__dirname, '../', 'node_modules')));
-  console.log(path.join(__dirname, '../', 'node_modules'))
+
   // notice the use of `_` as the first parameter above. This is a pattern for parameters that must exist, but you don't use or reference (or need) in the function body that follows.
 
 if (module === require.main) {
@@ -35,7 +35,7 @@ if (module === require.main) {
           ~ To help compare these objects, reference each of their `id` attributes
   */
 
-  const PORT = 1337 || process.env.PORT
+  const PORT = Number(1337 || process.env.PORT)
 
 
   const {conn, Campus, Student } = require('../db')
