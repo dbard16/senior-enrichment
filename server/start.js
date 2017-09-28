@@ -35,7 +35,7 @@ if (module === require.main) {
           ~ To help compare these objects, reference each of their `id` attributes
   */
 
-  const PORT = 1337
+  const PORT = 1337 || process.env.PORT
 
 
   const {conn, Campus, Student } = require('../db')
