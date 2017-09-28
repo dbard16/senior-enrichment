@@ -79,9 +79,7 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       const name = evt.target.newStudentName.value;
       const campusId = evt.target.campusId.value;
       const email = evt.target.newStudentEmail.value
-      console.log('name', name)
-      console.log('campusId', campusId)
-      console.log('email', email)
+
 
       // const campus = evt.target.
       // this.state.dirtyName = false;

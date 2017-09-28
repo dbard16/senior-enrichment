@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import {changeCurrentCampus} from '../store/store'
+
 
 function StudentList (props){
 
   const {campusId, students, campus} = props;
 
   return (
-    <div>
+   <div>
+    <div className="col-xs-8">
       <h3> {campus.name} </h3>
       <table className="table table-striped">
         <thead>
@@ -20,16 +22,25 @@ function StudentList (props){
         <tbody>
           {students.map((student, index) => {
             return (
-              <tr key={student.id}>
-                <td> {index + 1} </td>
-                <td> {student.name} </td>
-              </tr>
+                <tr key={student.id}>
+                      <td> {index + 1} </td>
+                    <Link to={`/student/${student.id}`}>
+                      <td> {student.name} </td>
+                    </Link>
+                </tr>
+
             )
           })}
         </tbody>
       </table>
+    </div>
+    <div className="col-xs-4">
 
     </div>
+
+   </div>
+
+
 
   )
 
@@ -51,7 +62,7 @@ class StudentListLoader extends Component {
 }
 
 const mapStateToProps = function(state, ownProps){
-  console.log(ownProps);
+
   const campusId = Number(ownProps.match.params.id);
   return {
     campus: state.campuses.find(campus => campus.id === campusId) || {name:''},

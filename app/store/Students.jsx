@@ -47,7 +47,7 @@ export function removeStudent(id){
     const action = deleteStudent(id)
     dispatch(action)
     axios.delete(`api/student/${id}`)
-
+    fetchStudents();
   }
 }
 

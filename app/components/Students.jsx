@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import {removeStudent} from '../store/Students'
 
 function Students (props) {
-  const {students} = props;
+  const {students, removeStudent, campuses} = props;
+  console.log(campuses);
 
   return (
     <div>
@@ -26,11 +27,22 @@ function Students (props) {
             return (
               <tr key={student.id}>
                 <td> {student.id} </td>
-                <td> {student.name} </td>
+                <Link to={`/student/${student.id}`}>
+                  <td> {student.name} </td>
+                </Link>
                 <td> {student.email} </td>
-                <td> {student.campusId} </td>
+                <Link to={`/campus/${student.campusId}`}>
+                 <td>
+                  {
+                    campuses.filter(campus => {
+                      return campus.id === student.campusId
+                    })[0].name
+
+                  }
+                 </td>
+                </Link>
                 <td>
-                  <button className="btn btn-warning" onClick={removeStudent}>
+                  <button className="btn btn-warning" onClick={() => removeStudent(student.id)}>
                     Delete
                   </button>
                 </td>
@@ -48,10 +60,14 @@ function Students (props) {
 
 const mapStateToProps = function(state) {
   return {
-    students: state.students
+    students: state.students,
+    campuses: state.campuses
   };
 };
 
+const mapDispatchToProps = {removeStudent}
 
 
-export default connect(mapStateToProps)(Students)
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students)

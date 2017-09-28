@@ -6,6 +6,7 @@ import Students from './Students';
 import StudentList from './StudentList'
 import CampusForm from './CampusForm'
 import StudentForm from './StudentForm'
+import SingleStudent from './SingleStudent'
 
 import Nav from './Nav';
 
@@ -29,6 +30,7 @@ export default class Main extends Component {
             <Route path="/campus/:id" component={StudentList}/>
             <Route path="/campus/" component={CampusForm}/>
             <Route path="/studentForm" component={StudentForm}/>
+            <Route path="/student/:id" component={SingleStudent}/>
             <Route path="/" component={Home} />
             <Redirect to="/"/>
           </Switch>
