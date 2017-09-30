@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {changeCurrentCampus} from '../store/store'
+import {changeCurrentCampus, removeCampus} from '../store/store'
 
 
 function StudentList (props){
@@ -12,11 +12,15 @@ function StudentList (props){
    <div>
     <div className="col-xs-8">
       <h3> {campus.name} </h3>
+      <button className="btn btn-warning" onClick={() => removeCampus(campus.id)}>
+        Delete
+      </button>
       <table className="table table-striped">
         <thead>
           <tr>
             <th> # </th>
             <th> Name </th>
+            <th> Email </th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +31,7 @@ function StudentList (props){
                     <Link to={`/student/${student.id}`}>
                       <td> {student.name} </td>
                     </Link>
+                      <td> {student.email} </td>
                 </tr>
 
             )

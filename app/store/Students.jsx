@@ -3,6 +3,7 @@ import axios from 'axios';
 const GET_STUDENT = 'GET_STUDENT';
 const GET_STUDENTS = 'GET_STUDENTS';
 const DELETE_STUDENT = 'DELETE_STUDENT';
+const EDIT_STUDENT = 'EDIT_STUDENT';
 
 export function getStudent(student){
   const action = {type: GET_STUDENT, student};
@@ -16,6 +17,11 @@ export function getStudents(students){
 
 export function deleteStudent(id){
   const action = {type: DELETE_STUDENT, id}
+  return action;
+}
+
+export function editStudent(student){
+  const action = {type: EDIT_STUDENT, student}
   return action;
 }
 
@@ -51,6 +57,18 @@ export function removeStudent(id){
   }
 }
 
+
+export function modifyStudent(student){
+  return function thunk(dispatch){
+    axios.put(`/api/student/${student.id}`)
+    .then(res => res.data)
+    .then( modifiedStudent =>{
+      const action = getStudent(modifiedStudent)
+      dispatch(action)
+    })
+  }
+}
+
 export default function reducer(state = [], action){
   switch (action.type){
     case GET_STUDENT:
@@ -61,6 +79,9 @@ export default function reducer(state = [], action){
 
     case DELETE_STUDENT:
       return state.filter(student => student.id != action.id)
+
+    case EDIT_STUDENT:
+      return [...state, action.student]
 
     default:
       return state;

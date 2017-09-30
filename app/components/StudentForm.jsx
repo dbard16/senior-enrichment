@@ -54,7 +54,7 @@ function CampusForm(props){
 
 const mapStateToProps = function(state){
   return {
-    newCampusName: state.newStudentName,
+    newStudentName: state.newStudentName,
     newStudentEmail: state.newStudentEmail,
     campuses: state.campuses
 
@@ -64,7 +64,7 @@ const mapStateToProps = function(state){
 const mapDispatchToProps = function(dispatch, ownProps) {
   return {
     handleNameChange (evt){
-      // this.state.dirtyName = true
+
       dispatch(writeStudentName(evt.target.value))
     },
     handleCampusChange (evt){
@@ -86,6 +86,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       // this.state.dirtyImage = false;
       dispatch(postStudent({name, email, campusId}, ownProps.history));
       dispatch(writeStudentName(''));
+      dispatch(writeStudentEmail(''));
+      dispatch(changeNewCampus(0));
 
     }
   }
